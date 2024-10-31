@@ -1,0 +1,11 @@
+{
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": [
+    "--fast"
+  ],
+  "go.delveConfig": {
+    "dlvFlags": [
+      // "--check-go-version=true"
+    ]
+  },
+}

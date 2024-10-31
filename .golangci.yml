@@ -1,0 +1,77 @@
+issues:
+  # Set to 0 to disable.
+  max-issues-per-linter: 0
+  # Set to 0 to disable.
+  max-same-issues: 0
+
+  # Which dirs to exclude: issues from them won't be reported.
+  # Can use regexp here: `generated.*`, regexp is applied on full path,
+  # including the path prefix if one is set.
+  # Default dirs are skipped independently of this option's value (see exclude-dirs-use-default).
+  # "/" will be replaced by current OS file path separator to properly work on Windows.
+  # Default: []
+  exclude-dirs:
+    - .codecov
+    - .github
+    - .vscode
+    - dist
+
+run:
+  timeout: 2m
+
+linters:
+  disable-all: true
+  enable:
+    # Simple linter to check that your code does not contain non-ASCII identifiers [fast: true, auto-fix: false]
+    - asciicheck
+    # checks whether HTTP response body is closed successfully [fast: false, auto-fix: false]
+    - bodyclose
+    # check the function whether use a non-inherited context [fast: false, auto-fix: false]
+    - contextcheck
+    # Computes and checks the cognitive complexity of functions [fast: true, auto-fix: false]
+    - gocognit
+    # Checks Go code for unused constants, variables, functions and types [fast: false, auto-fix: false]
+    - unused
+    # Errcheck is a program for checking for unchecked errors in go programs. These unchecked errors can be critical bugs in some cases [fast: false, auto-fix: false]
+    - errcheck
+    # Checks that sentinel errors are prefixed with the `Err` and error types are suffixed with the `Error`. [fast: false, auto-fix: false]
+    - errname
+    # errorlint is a linter for that can be used to find code that will cause problems with the error wrapping scheme introduced in Go 1.13. [fast: false, auto-fix: false]
+    - errorlint
+    # check exhaustiveness of enum switch statements [fast: false, auto-fix: false]
+    - exhaustive
+    # Gci controls golang package import order and makes it always deterministic. [fast: true, auto-fix: false]
+    - gci
+    # Provides diagnostics that check for bugs, performance and style issues. [fast: false, auto-fix: false]
+    - gocritic
+    # Inspects source code for security problems [fast: false, auto-fix: false]
+    - gosec
+    # Linter for Go source code that specializes in simplifying a code [fast: false, auto-fix: false]
+    - gosimple
+    # Vet examines Go source code and reports suspicious constructs, such as Printf calls whose arguments do not align with the format string [fast: false, auto-fix: false]
+    - govet
+    # Detects when assignments to existing variables are not used [fast: true, auto-fix: false]
+    - ineffassign
+    # Finds commonly misspelled English words in comments [fast: true, auto-fix: true]
+    - misspell
+    # Finds naked returns in functions greater than a specified function length [fast: true, auto-fix: false]
+    - nakedret
+    # Staticcheck is a go vet on steroids, applying a ton of static analysis checks [fast: false, auto-fix: false]
+    - staticcheck
+    # Like the front-end of a Go compiler, parses and type-checks Go code [fast: false, auto-fix: false]
+    - typecheck
+    # Reports ill-formed or insufficient nolint directives [fast: true, auto-fix: false]
+    - nolintlint
+    # Checks for misuse of Sprintf to construct a host with port in a URL.
+    - nosprintfhostport
+    # checks whether Err of rows is checked successfully in `sql.Rows` [fast: false, auto-fix: false]
+    - rowserrcheck
+    # Checks that sql.Rows and sql.Stmt are closed. [fast: false, auto-fix: false]
+    - sqlclosecheck
+    # Remove unnecessary type conversions [fast: false, auto-fix: false]
+    - unconvert
+
+# Linters settings.
+linters-settings:
+  gocognit:
+    min-complexity: 35

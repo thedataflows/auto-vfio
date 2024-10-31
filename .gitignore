@@ -1,0 +1,4 @@
+*.txt
+*.exe
+.vscode/launch.json
+auto-vfio

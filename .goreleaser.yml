@@ -1,0 +1,32 @@
+version: 2
+project_name: auto-vfio
+archives:
+  - strip_binary_directory: true
+    # format_overrides:
+    #   - goos: windows
+    #     format: zip
+    files:
+      - README.md
+    name_template: "{{ .ProjectName }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}"
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      # - darwin
+      # - windows
+    goarch:
+      - amd64
+      # - arm64
+    flags:
+      - -mod=readonly
+      - -trimpath
+    ldflags:
+      - -s
+      - -w
+      - -X=main.version={{.Tag}}
+checksum:
+  name_template: "sha256sums.txt"
+  algorithm: sha256
+snapshot:
+  name_template: "{{ .Tag }}-next"
