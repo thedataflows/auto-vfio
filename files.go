@@ -5,7 +5,6 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
-	"syscall"
 	"time"
 )
 
@@ -39,30 +38,6 @@ func listFiles(parentDirectory string, fileType fs.FileMode) ([]string, error) {
 	}
 
 	return result, nil
-}
-
-// Write to sysfs file with syscall
-//
-//nolint:unused
-func writeSysfsFileSyscall(file, data string) error {
-	fstat, err := os.Stat(file)
-	if err != nil {
-		return fmt.Errorf("failed to stat file: %w", err)
-	}
-	// Open file with write-only permission
-	f, err := os.OpenFile(file, os.O_WRONLY|os.O_SYNC, fstat.Mode().Perm())
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	// Write the device BDF
-	_, err = syscall.Write(int(f.Fd()), []byte(data+"\n"))
-	if err != nil {
-		return fmt.Errorf("failed to write file: %w", err)
-	}
-
-	return nil
 }
 
 // Write to sysfs file
